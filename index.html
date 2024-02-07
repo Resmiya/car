@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        
+
+    </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+</head>
+<body>
+    <h1 class="text-center" style="color:blue">Car World</h1>
+    <div class="card-group">
+        <div class="card">
+          
+          <div class="card-body">
+            <h3 class="card-title " style="color:blue">Enter Details</h3>
+            <label for="Carbrand">Car brand</label>
+            <input type="text" class="form-control" placeholder="Car Brand"  id="carbrand">
+            <label for="Car brand">Price</label>
+            <input type="text" class="form-control" placeholder="Price" id="price" >
+            <label for="Car brand">Key</label>
+            <input type="text" class="form-control" placeholder="Key" id="stkey" >
+           <div class="text-center"> <button type="button" class="btn btn-outline-success my-5" onclick="storecar()">Store Records</button></div>
+
+
+          </div>
+
+        </div>
+        <div class="card">
+          <div class="card-body">
+            <h3 class="card-title" style="color:blue">Enter Key to Retrive Item</h3>
+            <label for="Car brand">Key</label>
+            <input type="text" class="form-control" placeholder="Key" id="rtkey">
+           <div class="text-center"> <button type="button" class="btn btn-outline-primary my-5" onclick="retrivefun()">Retrive Records</button></div>
+          </div>
+          <div id="result"></div>
+        </div>
+        <div class="card">
+          <div class="card-body">
+            <h3 class="card-title" style="color:blue">Enter Key to Delete Item</h3>
+            <label for="Car brand">Key</label>
+            <input type="text" class="form-control"  id="dtkey" placeholder="Key" >
+           <div class="text-center"> <button type="button" class="btn btn-outline-danger my-5 " onclick="deletefun()">Remove Records</button></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="d-grid gap-2 mt-5">
+        <button class="btn btn-dark" type="button" clearfun()>Clear All Records</button>
+        
+      </div>
+      <script>
+        function storecar()
+        {
+            const car={
+                id:stkey.value,
+                brand:carbrand.value,
+                price:price.value
+            }
+            console.log(car);
+            if(car.id==" "||car.brand==""||car.price=="" )
+            {
+                alert(" please enter details..")
+            }
+            else{
+                if(car.id in localStorage)
+                {
+                    ("data already exist")
+                }
+                else{
+                    localStorage.setItem(car.id, JSON.stringify(car))
+                                    alert("data successfully stored")
+                }
+            }
+        }
+       function retrivefun()
+        {
+            var key = rtkey.value
+            if (key in localStorage) {
+                alert("sss")
+               
+                car=JSON.parse(localStorage.getItem(key))
+               
+                result.innerHTML=`<ul class="list-group">
+  <li class="list-group-item">Key:${car.id}</li>
+  <li class="list-group-item">Brand Name:${car.brand}</li>
+  <li class="list-group-item">Price:${car.price}</li>
+
+</ul>`
+               
+            }
+            else{
+                alert("data not exist")
+            }
+        }
+function deletefun()
+{
+    localStorage.removeItem(dtkey.value)
+    alert("Deleted successfully")
+}
+function clearfun()
+{
+    localStorage.clear()
+}
+      </script>
+    
+</body>
+</html>
